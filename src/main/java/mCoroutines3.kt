@@ -1,18 +1,46 @@
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.concurrent.thread
+import kotlin.system.measureTimeMillis
 
-fun main(args: Array<String>) = runBlocking<Unit> {
-    val jobs = arrayListOf<Job>()
-    jobs += launch(Unconfined) { // not confined -- will work with main thread
-        println("      'Unconfined': I'm working in thread ${Thread.currentThread().name}")
+typealias Millis = Long
+
+val number = AtomicInteger()
+
+fun main(args: Array<String>) {
+    val time: Millis = measureTimeMillis {
+//        increaseWithThreads()
+        increaseWithCorountines()
     }
-    jobs += launch(coroutineContext) { // context of the parent, runBlocking coroutine
-        println("'coroutineContext': I'm working in thread ${Thread.currentThread().name}")
+    println("time: $time")
+    println("result: $number")
+}
+
+private fun increaseWithThreads() {
+    val threads = List(10_000) {
+        thread {
+            increaseAndPrint()
+        }
     }
-    jobs += launch(CommonPool) { // will get dispatched to ForkJoinPool.commonPool (or equivalent)
-        println("      'CommonPool': I'm working in thread ${Thread.currentThread().name}")
+
+    threads.forEach { it.join() }
+}
+
+private fun increaseWithCorountines() {
+    val jobs = List(10_000) {
+        launch {
+//            delay(1000)
+            increaseAndPrint()
+        }
     }
-    jobs += launch(newSingleThreadContext("MyOwnThread")) { // will get its own new thread
-        println("          'newSTC': I'm working in thread ${Thread.currentThread().name}")
+
+    runBlocking {
+        jobs.forEach { it.join() }
     }
-    jobs.forEach { it.join() }
+}
+
+private fun increaseAndPrint() {
+    val currentResult = number.addAndGet(1)
+    println(currentResult)
 }
