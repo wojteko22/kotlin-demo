@@ -1,6 +1,6 @@
 import java.util.stream.Stream;
 
-public class jCollections2 {
+public class JCollections2 {
     public static void main(String[] args) {
         Stream<Integer> stream = Stream.of(1, 2, 3)
                 .map(it -> {

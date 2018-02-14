@@ -1,8 +1,8 @@
-public class JPerson {
+public class DPerson {
     private final String name;
     private final int age;
 
-    public JPerson(String name, int age) {
+    public DPerson(String name, int age) {
         this.name = name;
         this.age = age;
     }
