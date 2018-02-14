@@ -10,8 +10,8 @@ val number = AtomicInteger()
 
 fun main(args: Array<String>) {
     val time: Millis = measureTimeMillis {
-//        increaseWithThreads()
-        increaseWithCorountines()
+        increaseWithThreads()
+//        increaseWithCorountines()
     }
     println("time: $time")
     println("result: $number")
