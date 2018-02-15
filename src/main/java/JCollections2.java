@@ -9,6 +9,6 @@ public class JCollections2 {
                 });
 
         System.out.println("first: " + stream.findFirst());
-        System.out.println("first: " + stream.findFirst());
+//        System.out.println("first: " + stream.findFirst());
     }
 }

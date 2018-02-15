@@ -1,12 +1,15 @@
 fun main(args: Array<String>) {
 
-    val filteredList = listOf(1, 2)
-//    filteredCollection[0] = 9 // error
+    val list = listOf(1, 2)
+//    list[0] = 9 // error
 
-    val mutableCollection = filteredList.toMutableList()
-    mutableCollection[0] = 9
-    println("mutated: $mutableCollection")
+    val mutableList = mutableListOf(1, 2)
+    val mutableList2 = list.toMutableList()
+    mutableList[0] = 9
+    println("mutated: $mutableList")
 
-    val biggerList = filteredList + filteredList
+    val biggerList = list and mutableList
     println("bigger: $biggerList")
 }
+
+infix fun <T> List<T>.and(other: List<T>) = this + other
