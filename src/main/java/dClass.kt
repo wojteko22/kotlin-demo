@@ -1,6 +1,10 @@
-class Person(val name: String, val age: Int) {
+class Person(val name: String, val age: Int) { // todo: data
     init {
         println("init")
+    }
+
+    constructor(message: String): this("Maciek", 21) {
+        println(message)
     }
 
     var height = 1.8
@@ -12,8 +16,11 @@ class Person(val name: String, val age: Int) {
             return field
         }
         set(value) {
-            field = value + 1
+            println("set")
+            field = value
         }
+
+//    lateinit var notInitialized: String
 }
 
 
@@ -21,14 +28,16 @@ val person = Person("Maciek", 21)
 
 private val testEquals = person == Person("Maciek", 21)
 
-//lateinit var notInitializedPerson: Person
-
 fun main(args: Array<String>) {
+    println("main")
     person.points = 20
-    println("age is ${person.points}")
+    println("points: ${person.points}")
     println("toString: $person")
-    println("equals $testEquals")
+    println("equals: $testEquals")
 
-//    print(notInitializedPerson.age)
 //    val (name, age) = person
+//    val newPerson = person.copy(age = 22)
+//    println("copied: $newPerson")
+
+//    print(person.notInitialized)
 }

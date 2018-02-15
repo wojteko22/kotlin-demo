@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
 //    val wrongLength = nullableName.length // error
 
     val nullableLength = nullableName?.length
-//    val length = nullableName!!.length
+//    val dangerousLength = nullableName!!.length
     println("Second: $nullableLength")
 
     val length2 = nullableName?.length ?: -1
@@ -19,4 +19,6 @@ fun main(args: Array<String>) {
         val length3 = nullableName.length
         println("Fourth: $length3")
     }
+
+    nullableName?.let { println(it) }
 }
