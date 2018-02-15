@@ -1,12 +1,5 @@
 import java.math.BigDecimal
 
-fun main(args: Array<String>) {
-    val power = 2.pow(5)
-    print(power)
-
-    32.bd
-}
-
 fun Int.pow(exponent: Int): Int =
     if (exponent == 0)
         1
@@ -15,3 +8,10 @@ fun Int.pow(exponent: Int): Int =
 
 val Int.bd
     get() = BigDecimal(this)
+
+fun main(args: Array<String>) {
+    val power = 2.pow(5)
+    print(power)
+
+    9999.bd
+}
