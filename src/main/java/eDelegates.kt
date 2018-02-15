@@ -1,22 +1,37 @@
 interface Base {
-    val a: String
-    fun b(number: Number): String
-    fun c()
+    val property: String
+    fun foo(number: Number): String
+    fun bar()
 }
 
-class MagicDecorator(private val otherBase: Base) : Base {
+class Derived(override val property: String) : Base {
+    override fun foo(number: Number): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    override val a: String
-        get() = otherBase.a
+    override fun bar() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
-    override fun b(number: Number): String = otherBase.b(number)
+class MagicDecorator(private val otherBase: Base) : Base /*by otherBase */{
 
-    override fun c() {
-        otherBase.c()
+    override val property: String = otherBase.property
+
+    override fun foo(number: Number): String = otherBase.foo(number)
+
+    override fun bar() {
+        otherBase.bar()
     }
 
     fun doMagic() {
         println("It's a kind of magic")
     }
+}
+
+fun main(args: Array<String>) {
+    val base: Base = Derived("a")
+    val decorated = MagicDecorator(base)
+    println(decorated.property)
 }
 
